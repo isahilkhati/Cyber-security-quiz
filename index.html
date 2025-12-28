@@ -1,0 +1,1445 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyber Security Quiz - Test Your Skills</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a0f1f;
+            color: #e0ffe0;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(135deg, #0a0f1f 0%, #1a1f3a 100%);
+        }
+
+        /* Cyber Grid Background */
+        .cyber-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 255, 157, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 157, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: 0;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        .matrix-rain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Floating Code Elements */
+        .floating-codes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .code-block {
+            position: absolute;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            color: #00ff9d;
+            opacity: 0.3;
+            white-space: nowrap;
+            animation: floatCode 20s linear infinite;
+        }
+
+        @keyframes floatCode {
+            0% {
+                transform: translateY(100vh) translateX(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.3;
+            }
+            90% {
+                opacity: 0.3;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(50px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .code-block:nth-child(1) { left: 10%; animation-delay: 0s; font-size: 12px; }
+        .code-block:nth-child(2) { left: 25%; animation-delay: 2s; font-size: 14px; }
+        .code-block:nth-child(3) { left: 40%; animation-delay: 4s; font-size: 16px; }
+        .code-block:nth-child(4) { left: 55%; animation-delay: 6s; font-size: 13px; }
+        .code-block:nth-child(5) { left: 70%; animation-delay: 8s; font-size: 15px; }
+        .code-block:nth-child(6) { left: 85%; animation-delay: 10s; font-size: 14px; }
+        .code-block:nth-child(7) { left: 15%; animation-delay: 12s; font-size: 16px; }
+        .code-block:nth-child(8) { left: 30%; animation-delay: 14s; font-size: 13px; }
+        .code-block:nth-child(9) { left: 60%; animation-delay: 16s; font-size: 15px; }
+        .code-block:nth-child(10) { left: 80%; animation-delay: 18s; font-size: 12px; }
+
+        /* Glowing Particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #00ff9d;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #00ff9d;
+            animation: particleFloat 15s linear infinite;
+        }
+
+        @keyframes particleFloat {
+            0% {
+                transform: translateY(100vh) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100px);
+                opacity: 0;
+            }
+        }
+
+        .particle:nth-child(1) { left: 5%; animation-delay: 0s; animation-duration: 12s; }
+        .particle:nth-child(2) { left: 15%; animation-delay: 2s; animation-duration: 14s; }
+        .particle:nth-child(3) { left: 30%; animation-delay: 4s; animation-duration: 16s; }
+        .particle:nth-child(4) { left: 45%; animation-delay: 1s; animation-duration: 13s; }
+        .particle:nth-child(5) { left: 60%; animation-delay: 3s; animation-duration: 15s; }
+        .particle:nth-child(6) { left: 75%; animation-delay: 5s; animation-duration: 14s; }
+        .particle:nth-child(7) { left: 90%; animation-delay: 2s; animation-duration: 12s; }
+        .particle:nth-child(8) { left: 20%; animation-delay: 6s; animation-duration: 16s; }
+        .particle:nth-child(9) { left: 50%; animation-delay: 4s; animation-duration: 13s; }
+        .particle:nth-child(10) { left: 80%; animation-delay: 1s; animation-duration: 15s; }
+
+        /* Welcome Screen */
+        .welcome-screen {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            padding-bottom: 180px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Cyber Lines */
+        .cyber-lines {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .cyber-line {
+            position: absolute;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #00ff9d, transparent);
+            animation: scanLine 8s linear infinite;
+        }
+
+        @keyframes scanLine {
+            0% {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+            50% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+        }
+
+        .cyber-line:nth-child(1) { top: 20%; width: 60%; animation-delay: 0s; }
+        .cyber-line:nth-child(2) { top: 40%; width: 70%; animation-delay: 2s; }
+        .cyber-line:nth-child(3) { top: 60%; width: 50%; animation-delay: 4s; }
+        .cyber-line:nth-child(4) { top: 80%; width: 65%; animation-delay: 6s; }
+
+        .welcome-content {
+            text-align: center;
+            max-width: 800px;
+            animation: fadeInUp 1s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .welcome-logo {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 30px;
+            position: relative;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .shield-icon {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #00ff9d 0%, #00dd85 100%);
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 60px;
+            box-shadow: 0 0 50px rgba(0,255,157,0.6);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 30px rgba(0,255,157,0.6); }
+            50% { box-shadow: 0 0 60px rgba(0,255,157,0.9); }
+        }
+
+        .welcome-title {
+            font-size: 3.5em;
+            color: #00ff9d;
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px #00ff9d;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { 
+                text-shadow: 0 0 10px #00ff9d, 0 0 20px #00ff9d, 0 0 30px #00ff9d; 
+            }
+            to { 
+                text-shadow: 0 0 20px #00ff9d, 0 0 30px #00ff9d, 0 0 40px #00ff9d, 0 0 50px #00ff9d; 
+            }
+        }
+
+        .welcome-subtitle {
+            font-size: 1.3em;
+            color: #8fbfff;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .welcome-features {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+
+        .feature-card {
+            background: rgba(17, 26, 51, 0.8);
+            border: 2px solid #00ff9d;
+            border-radius: 12px;
+            padding: 20px;
+            width: 200px;
+            transition: all 0.3s ease;
+            animation: fadeIn 1s ease backwards;
+        }
+
+        .feature-card:nth-child(1) { animation-delay: 0.2s; }
+        .feature-card:nth-child(2) { animation-delay: 0.4s; }
+        .feature-card:nth-child(3) { animation-delay: 0.6s; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0,255,157,0.4);
+            border-color: #00ccff;
+        }
+
+        .feature-icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        .feature-title {
+            font-size: 18px;
+            color: #00ff9d;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .feature-desc {
+            font-size: 14px;
+            color: #8fbfff;
+        }
+
+        .start-btn {
+            padding: 20px 50px;
+            background: linear-gradient(135deg, #00ff9d 0%, #00dd85 100%);
+            border: none;
+            font-size: 22px;
+            border-radius: 50px;
+            cursor: pointer;
+            color: #0a0f1f;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 30px rgba(0,255,157,0.4);
+            animation: bounce 2s ease-in-out infinite;
+            margin-top: 30px;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .start-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 50px rgba(0,255,157,0.6);
+            animation: none;
+        }
+
+        /* Main Container */
+        .container {
+            text-align: center;
+            width: 100%;
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .main-title {
+            color: #00ff9d;
+            margin-bottom: 30px;
+            text-shadow: 0 0 20px #00ff9d;
+            font-size: 2.5em;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        /* Difficulty Selector */
+        .difficulty-selector {
+            background: rgba(17, 26, 51, 0.95);
+            border: 2px solid #00ff9d;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 0 40px rgba(0,255,157,0.4);
+            backdrop-filter: blur(10px);
+        }
+
+        .difficulty-title {
+            font-size: 1.8em;
+            margin-bottom: 30px;
+            color: #00ff9d;
+        }
+
+        .difficulty-btn {
+            display: block;
+            width: 100%;
+            padding: 20px;
+            margin: 20px 0;
+            background: linear-gradient(135deg, #00ff9d 0%, #00dd85 100%);
+            border: none;
+            font-size: 20px;
+            border-radius: 12px;
+            cursor: pointer;
+            color: #0a0f1f;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .difficulty-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .difficulty-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .difficulty-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,255,157,0.5);
+        }
+
+        .back-btn {
+            background: rgba(17, 26, 51, 0.8);
+            border: 2px solid #00ff9d;
+            color: #00ff9d;
+            padding: 12px 30px;
+            margin-top: 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: #00ff9d;
+            color: #0a0f1f;
+            transform: translateY(-2px);
+        }
+
+        /* Quiz Card */
+        .quiz-card {
+            background: rgba(17, 26, 51, 0.95);
+            border: 2px solid #00ff9d;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 0 40px rgba(0,255,157,0.4);
+            backdrop-filter: blur(10px);
+            display: none;
+        }
+
+        .quiz-card.active {
+            display: block;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background-color: #0d1630;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            overflow: hidden;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #00ff9d 0%, #00dd85 50%, #00ff9d 100%);
+            transition: width 0.5s ease;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,255,157,0.8);
+        }
+
+        .question-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 25px;
+            font-size: 16px;
+            color: #00ff9d;
+            font-weight: bold;
+        }
+
+        .difficulty-badge {
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .difficulty-badge.easy {
+            background: linear-gradient(135deg, #0f9d4a, #12c95f);
+            color: white;
+            box-shadow: 0 0 20px rgba(15, 157, 74, 0.5);
+        }
+
+        .difficulty-badge.moderate {
+            background: linear-gradient(135deg, #ff9d00, #ffb700);
+            color: white;
+            box-shadow: 0 0 20px rgba(255, 157, 0, 0.5);
+        }
+
+        .difficulty-badge.hard {
+            background: linear-gradient(135deg, #ff4444, #ff6b6b);
+            color: white;
+            box-shadow: 0 0 20px rgba(255, 68, 68, 0.5);
+        }
+
+        #question {
+            font-size: 22px;
+            margin-bottom: 30px;
+            line-height: 1.6;
+            text-align: left;
+            color: #e0ffe0;
+            padding: 20px;
+            background: rgba(13, 22, 48, 0.5);
+            border-radius: 10px;
+            border-left: 4px solid #00ff9d;
+        }
+
+        .options {
+            margin: 25px 0;
+        }
+
+        .option {
+            background: rgba(13, 22, 48, 0.8);
+            border: 2px solid #00ff9d;
+            padding: 18px;
+            margin: 15px 0;
+            border-radius: 10px;
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.3s ease;
+            font-size: 17px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .option::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: #00ff9d;
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .option:hover:not(.selected):not(.disabled)::before {
+            transform: scaleY(1);
+        }
+
+        .option:hover:not(.selected):not(.disabled) {
+            background: rgba(19, 33, 71, 0.9);
+            transform: translateX(10px);
+            border-color: #00ccff;
+            box-shadow: 0 5px 20px rgba(0,255,157,0.3);
+        }
+
+        .option.selected {
+            background: rgba(26, 42, 74, 0.9);
+            border-color: #00ccff;
+        }
+
+        .option.correct {
+            background: linear-gradient(135deg, #0d7a3a, #0f9d4a) !important;
+            border-color: #0f9d4a !important;
+            animation: correctPulse 0.6s ease;
+        }
+
+        .option.wrong {
+            background: linear-gradient(135deg, #7a0d0d, #9d0f0f) !important;
+            border-color: #ff4444 !important;
+            animation: wrongShake 0.6s ease;
+        }
+
+        .option.disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        @keyframes correctPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+        }
+
+        @keyframes wrongShake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        button {
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #00ff9d 0%, #00dd85 100%);
+            border: none;
+            font-size: 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 25px;
+            color: #0a0f1f;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(0,255,157,0.3);
+        }
+
+        button:hover:not(:disabled) {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(0,255,157,0.5);
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Result Card */
+        .result-card {
+            background: rgba(17, 26, 51, 0.95);
+            border: 2px solid #00ff9d;
+            padding: 50px;
+            border-radius: 15px;
+            box-shadow: 0 0 40px rgba(0,255,157,0.4);
+            backdrop-filter: blur(10px);
+            display: none;
+        }
+
+        .result-card.active {
+            display: block;
+            animation: zoomIn 0.5s ease;
+        }
+
+        @keyframes zoomIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .result-title {
+            color: #00ff9d;
+            margin-bottom: 30px;
+            font-size: 2.2em;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        .score-circle {
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            border: 12px solid #00ff9d;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 40px auto;
+            background: linear-gradient(135deg, #0d1630 0%, #1a2847 100%);
+            box-shadow: 0 0 50px rgba(0,255,157,0.5);
+            animation: rotateCircle 3s ease-in-out infinite;
+        }
+
+        @keyframes rotateCircle {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(5deg); }
+        }
+
+        .score-percentage {
+            font-size: 56px;
+            font-weight: bold;
+            color: #00ff9d;
+            text-shadow: 0 0 20px #00ff9d;
+        }
+
+        .score-label {
+            font-size: 18px;
+            color: #e0ffe0;
+            margin-top: 5px;
+        }
+
+        .score-details {
+            display: flex;
+            justify-content: space-around;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+
+        .score-item {
+            padding: 25px;
+            background: rgba(13, 22, 48, 0.8);
+            border-radius: 12px;
+            margin: 10px;
+            min-width: 160px;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .score-item:hover {
+            transform: translateY(-5px);
+            border-color: #00ff9d;
+            box-shadow: 0 5px 20px rgba(0,255,157,0.3);
+        }
+
+        .score-item .number {
+            font-size: 40px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .score-item.correct .number {
+            color: #0f9d4a;
+            text-shadow: 0 0 10px #0f9d4a;
+        }
+
+        .score-item.incorrect .number {
+            color: #ff4444;
+            text-shadow: 0 0 10px #ff4444;
+        }
+
+        .score-item.total .number {
+            color: #00ccff;
+            text-shadow: 0 0 10px #00ccff;
+        }
+
+        #performanceMessage {
+            font-size: 20px;
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(0,255,157,0.1);
+            border-radius: 10px;
+            border-left: 4px solid #00ff9d;
+        }
+
+        .restart-btn {
+            margin-top: 20px;
+            font-size: 18px;
+            padding: 15px 40px;
+        }
+
+        /* Social Links & Footer */
+        .social-footer {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            align-items: center;
+            z-index: 10;
+            animation: fadeInUp 1s ease 0.5s backwards;
+        }
+
+        .creator-name {
+            color: #00ff9d;
+            font-size: 13px;
+            font-weight: bold;
+            text-shadow: 0 0 10px #00ff9d;
+            letter-spacing: 0.5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(0, 255, 157, 0.1);
+            border: 2px solid #00ff9d;
+            text-decoration: none;
+            font-size: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(0, 255, 157, 0.3);
+            cursor: pointer;
+        }
+
+        .social-link:hover {
+            background: linear-gradient(135deg, #00ff9d 0%, #00dd85 100%);
+            transform: scale(1.1);
+            box-shadow: 0 5px 25px rgba(0, 255, 157, 0.6);
+            color: #0a0f1f;
+        }
+
+        /* Hide/Show Classes */
+        .hidden {
+            display: none !important;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .welcome-title {
+                font-size: 2.5em;
+            }
+            
+            .welcome-features {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .feature-card {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .main-title {
+                font-size: 2em;
+            }
+            
+            #question {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+
+ <body>
+    <div class="background"></div>
+    <div class="cyber-grid"></div>
+    <canvas class="matrix-rain"></canvas>
+    
+    <!-- Floating Code Snippets -->
+    <div class="floating-codes">
+        <div class="code-block">if(secure){encrypt();}</div>
+        <div class="code-block">function authenticate(){}</div>
+        <div class="code-block">const password = hash()</div>
+        <div class="code-block">firewall.enable();</div>
+        <div class="code-block">SSL.verify();</div>
+        <div class="code-block">while(safe){monitor();}</div>
+        <div class="code-block">crypto.encrypt(data)</div>
+        <div class="code-block">if(!vulnerable){}</div>
+        <div class="code-block">scan.malware();</div>
+        <div class="code-block">vpn.connect();</div>
+    </div>
+
+    <!-- Glowing Particles -->
+    <div class="particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
+    <!-- Welcome Screen -->
+    <div id="welcomeScreen" class="welcome-screen">
+        <div class="cyber-lines">
+            <div class="cyber-line"></div>
+            <div class="cyber-line"></div>
+            <div class="cyber-line"></div>
+            <div class="cyber-line"></div>
+        </div>
+        <div class="welcome-content">
+            <div class="welcome-logo">
+                <div class="shield-icon">🛡️</div>
+            </div>
+            <h1 class="welcome-title">Cyber Security Quiz</h1>
+            <p class="welcome-subtitle">Test your knowledge and master the art of digital defense. Challenge yourself across three difficulty levels!</p>
+            
+            <div class="welcome-features">
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <div class="feature-title">45+ Questions</div>
+                    <div class="feature-desc">Comprehensive question bank</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <div class="feature-title">3 Difficulty Levels</div>
+                    <div class="feature-desc">Easy, Moderate & Hard</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <div class="feature-title">Instant Results</div>
+                    <div class="feature-desc">Real-time feedback</div>
+                </div>
+            </div>
+            
+            <button class="start-btn" onclick="showDifficultySelector()">Start Quiz</button>
+        </div>
+    </div>
+
+    <!-- Social Footer -->
+    <div class="social-footer" id="socialFooter">
+        <span class="creator-name">Stay Tuned with Sahil</span>
+        <div class="social-links">
+            <a href="https://www.instagram.com/i.sahil.khati/" target="_blank" class="social-link" title="Instagram">📷</a>
+            <a href="https://www.github.com/isahilkhati/" target="_blank" class="social-link" title="GitHub">🐙</a>
+            <a href="https://wa.me/+918901153176" target="_blank" class="social-link" title="WhatsApp">💬</a>
+        </div>
+    </div>
+    <div id="mainContainer" class="container hidden">
+        <h1 class="main-title">🛡️ Cyber Security Quiz</h1>
+
+        <!-- Difficulty Selector -->
+        <div id="difficultySelector" class="difficulty-selector hidden">
+            <h2 class="difficulty-title">Select Difficulty Level</h2>
+            <button class="difficulty-btn" onclick="startQuiz('easy')">🟢 Easy - Beginner Friendly</button>
+            <button class="difficulty-btn" onclick="startQuiz('moderate')">🟡 Moderate - Intermediate</button>
+            <button class="difficulty-btn" onclick="startQuiz('hard')">🔴 Hard - Expert Level</button>
+            <button class="back-btn" onclick="backToWelcome()">← Back to Home</button>
+        </div>
+
+        <!-- Quiz Card -->
+        <div id="quizCard" class="quiz-card">
+            <div class="difficulty-badge" id="difficultyBadge"></div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar"></div>
+            </div>
+            <div class="question-info">
+                <span id="questionNumber"></span>
+                <span id="questionCount"></span>
+            </div>
+            <p id="question"></p>
+            <div id="options" class="options"></div>
+        </div>
+
+        <!-- Result Card -->
+        <div id="resultCard" class="result-card">
+            <h2 class="result-title">Quiz Completed! 🎉</h2>
+            <div class="score-circle">
+                <div class="score-percentage" id="scorePercentage"></div>
+                <div class="score-label">Your Score</div>
+            </div>
+            <div class="score-details">
+                <div class="score-item correct">
+                    <div class="number" id="correctCount"></div>
+                    <div>Correct</div>
+                </div>
+                <div class="score-item incorrect">
+                    <div class="number" id="incorrectCount"></div>
+                    <div>Incorrect</div>
+                </div>
+                <div class="score-item total">
+                    <div class="number" id="totalCount"></div>
+                    <div>Total</div>
+                </div>
+            </div>
+            <div id="performanceMessage"></div>
+            <button class="restart-btn" onclick="restartQuiz()">🔄 Take Quiz Again</button>
+        </div>
+    </div>
+
+    <script>
+        // Matrix Rain Animation
+        const canvas = document.querySelector('.matrix-rain');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const chars = '01';
+        const fontSize = 14;
+        const columns = canvas.width / fontSize;
+        const drops = Array(Math.floor(columns)).fill(1);
+
+        function drawMatrix() {
+            ctx.fillStyle = 'rgba(10, 15, 31, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = '#00ff9d';
+            ctx.font = fontSize + 'px monospace';
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = chars[Math.floor(Math.random() * chars.length)];
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+
+        setInterval(drawMatrix, 50);
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // Navigation Functions
+        function showDifficultySelector() {
+            document.getElementById('welcomeScreen').classList.add('hidden');
+            document.getElementById('mainContainer').classList.remove('hidden');
+            document.getElementById('difficultySelector').classList.remove('hidden');
+            document.getElementById('socialFooter').classList.add('hidden');
+        }
+
+        function backToWelcome() {
+            document.getElementById('mainContainer').classList.add('hidden');
+            document.getElementById('difficultySelector').classList.add('hidden');
+            document.getElementById('welcomeScreen').classList.remove('hidden');
+            document.getElementById('socialFooter').classList.remove('hidden');
+        }
+
+        // Quiz Data with ALL THREE difficulty levels
+        const questions = {
+            easy: [
+                {
+                    q: "What does the CIA triad stand for?",
+                    options: ["Confidentiality, Integrity, Availability", "Control, Identify, Authenticate", "Confidentiality, Inspection, Access", "Control, Integrity, Audit"],
+                    answer: 0
+                },
+                {
+                    q: "What is a firewall?",
+                    options: ["A physical wall that prevents fire", "A software that blocks viruses", "A network security device that monitors traffic", "An antivirus program"],
+                    answer: 2
+                },
+                {
+                    q: "What does VPN stand for?",
+                    options: ["Virtual Private Network", "Very Private Network", "Virtual Public Network", "Verified Private Network"],
+                    answer: 0
+                },
+                {
+                    q: "Which of these is considered a strong password?",
+                    options: ["password123", "12345678", "P@ssw0rd!2024#Secure", "qwerty"],
+                    answer: 2
+                },
+                {
+                    q: "What is phishing?",
+                    options: ["A type of fishing technique", "A fraudulent attempt to obtain sensitive information", "A computer game", "A programming language"],
+                    answer: 1
+                },
+                {
+                    q: "What is malware?",
+                    options: ["Good software", "Malicious software designed to harm computers", "A type of hardware", "An operating system"],
+                    answer: 1
+                },
+                {
+                    q: "What does SSL stand for?",
+                    options: ["Secure Socket Layer", "Super Secure Link", "System Security Layer", "Safe Socket Link"],
+                    answer: 0
+                },
+                {
+                    q: "What is two-factor authentication (2FA)?",
+                    options: ["Using two passwords", "A security process requiring two verification methods", "Having two accounts", "Logging in twice"],
+                    answer: 1
+                },
+                {
+                    q: "What is a virus in cybersecurity?",
+                    options: ["A biological disease", "A malicious program that replicates itself", "An email attachment", "A hardware component"],
+                    answer: 1
+                },
+                {
+                    q: "What is encryption?",
+                    options: ["Deleting data", "Converting data into a coded format", "Backing up data", "Compressing files"],
+                    answer: 1
+                },
+                {
+                    q: "What is spam?",
+                    options: ["A food product", "Unsolicited or unwanted emails", "A type of malware", "A programming error"],
+                    answer: 1
+                },
+                {
+                    q: "What does HTTPS indicate?",
+                    options: ["The website is old", "The website has secure encrypted connection", "The website is slow", "The website is free"],
+                    answer: 1
+                },
+                {
+                    q: "What is a cookie in web browsing?",
+                    options: ["A snack for programmers", "A small piece of data stored by websites", "A type of virus", "An image file"],
+                    answer: 1
+                },
+                {
+                    q: "What is ransomware?",
+                    options: ["Free software", "Malware that encrypts files and demands payment", "A backup tool", "An antivirus program"],
+                    answer: 1
+                },
+                {
+                    q: "What is the purpose of antivirus software?",
+                    options: ["To create viruses", "To detect and remove malicious software", "To speed up computer", "To browse the internet"],
+                    answer: 1
+                }
+            ],
+            moderate: [
+                {
+                    q: "What is a DDoS attack?",
+                    options: ["A password attack", "Distributed Denial of Service attack", "A type of virus", "A firewall technique"],
+                    answer: 1
+                },
+                {
+                    q: "What is SQL injection?",
+                    options: ["A medical procedure", "A code injection technique to attack databases", "A programming language", "A network protocol"],
+                    answer: 1
+                },
+                {
+                    q: "What is a zero-day vulnerability?",
+                    options: ["A vulnerability discovered on day zero", "A security flaw unknown to software vendor", "A vulnerability that takes zero days to fix", "An expired security certificate"],
+                    answer: 1
+                },
+                {
+                    q: "What is social engineering in cybersecurity?",
+                    options: ["Engineering social networks", "Psychological manipulation to trick users", "Building social media platforms", "Network engineering"],
+                    answer: 1
+                },
+                {
+                    q: "What is a man-in-the-middle attack?",
+                    options: ["A physical assault", "An attack where attacker intercepts communication", "A virus type", "A firewall breach"],
+                    answer: 1
+                },
+                {
+                    q: "What is the purpose of a honeypot in cybersecurity?",
+                    options: ["To store passwords", "To trap and monitor attackers", "To speed up network", "To backup data"],
+                    answer: 1
+                },
+                {
+                    q: "What is cross-site scripting (XSS)?",
+                    options: ["A web development framework", "A security vulnerability in web applications", "A programming language", "A database system"],
+                    answer: 1
+                },
+                {
+                    q: "What is a brute force attack?",
+                    options: ["A physical attack on hardware", "Trying many passwords until correct one is found", "A DDoS attack", "A social engineering technique"],
+                    answer: 1
+                },
+                {
+                    q: "What is penetration testing?",
+                    options: ["Testing internet speed", "Authorized simulated attack to find vulnerabilities", "Installing antivirus", "Backing up data"],
+                    answer: 1
+                },
+                {
+                    q: "What is a Trojan horse in malware?",
+                    options: ["A Greek mythology story", "Malware disguised as legitimate software", "A type of firewall", "An encryption method"],
+                    answer: 1
+                },
+                {
+                    q: "What is multi-factor authentication?",
+                    options: ["Using multiple passwords", "Using two or more verification methods", "Having multiple accounts", "Using biometrics only"],
+                    answer: 1
+                },
+                {
+                    q: "What is the dark web?",
+                    options: ["A scary website", "Part of internet not indexed by search engines", "A black themed website", "An offline network"],
+                    answer: 1
+                },
+                {
+                    q: "What is a botnet?",
+                    options: ["A robot network", "Network of infected computers controlled remotely", "A social network", "An ISP network"],
+                    answer: 1
+                },
+                {
+                    q: "What is endpoint security?",
+                    options: ["Security at network endpoints", "Protecting end-user devices", "Securing email endpoints", "Router security"],
+                    answer: 1
+                },
+                {
+                    q: "What is a security patch?",
+                    options: ["A physical patch on hardware", "Software update fixing security vulnerabilities", "A network cable", "An antivirus signature"],
+                    answer: 1
+                }
+            ],
+            hard: [
+                {
+                    q: "What is the primary purpose of IPsec?",
+                    options: ["Email encryption", "Securing IP communications through authentication and encryption", "Web browsing security", "Password management"],
+                    answer: 1
+                },
+                {
+                    q: "What is a rainbow table attack?",
+                    options: ["Colorful display hack", "Precomputed table for reversing cryptographic hashes", "Network scanning technique", "Social engineering method"],
+                    answer: 1
+                },
+                {
+                    q: "What is the difference between symmetric and asymmetric encryption?",
+                    options: ["Speed only", "Symmetric uses same key, asymmetric uses public/private key pair", "Cost difference", "No difference"],
+                    answer: 1
+                },
+                {
+                    q: "What is a buffer overflow attack?",
+                    options: ["Network congestion", "Writing data beyond buffer boundaries to execute malicious code", "Database overflow", "Email flooding"],
+                    answer: 1
+                },
+                {
+                    q: "What is the OWASP Top 10?",
+                    options: ["Top 10 hackers", "List of critical web application security risks", "Top 10 antivirus programs", "Programming languages ranking"],
+                    answer: 1
+                },
+                {
+                    q: "What is sandboxing in cybersecurity?",
+                    options: ["Playing in sand", "Isolated environment for testing untrusted code", "Beach-themed security", "Cloud storage"],
+                    answer: 1
+                },
+                {
+                    q: "What is the purpose of SIEM?",
+                    options: ["Email security", "Security Information and Event Management", "Software installation", "Internet browsing"],
+                    answer: 1
+                },
+                {
+                    q: "What is a side-channel attack?",
+                    options: ["Attacking through side doors", "Attack based on information gained from physical implementation", "Network bypass", "Social media attack"],
+                    answer: 1
+                },
+                {
+                    q: "What is privilege escalation?",
+                    options: ["Getting a promotion", "Gaining elevated access beyond intended permissions", "Upgrading software", "Increasing bandwidth"],
+                    answer: 1
+                },
+                {
+                    q: "What is the purpose of a WAF (Web Application Firewall)?",
+                    options: ["To speed up websites", "To protect web applications from attacks", "To host websites", "To design websites"],
+                    answer: 1
+                },
+                {
+                    q: "What is cryptographic hashing used for?",
+                    options: ["Encrypting passwords only", "Creating fixed-size unique fingerprints of data", "Compressing files", "Networking"],
+                    answer: 1
+                },
+                {
+                    q: "What is a logic bomb?",
+                    options: ["Logical reasoning test", "Malicious code triggered by specific conditions", "Mathematical algorithm", "Debugging tool"],
+                    answer: 1
+                },
+                {
+                    q: "What is defense in depth?",
+                    options: ["Deep sea security", "Layered security approach with multiple defenses", "Password length requirement", "Firewall setting"],
+                    answer: 1
+                },
+                {
+                    q: "What is certificate pinning?",
+                    options: ["Physical certificate storage", "Associating host with expected certificate", "Organizing documents", "Email authentication"],
+                    answer: 1
+                },
+                {
+                    q: "What is the principle of least privilege?",
+                    options: ["Minimum password length", "Granting minimum access rights needed", "Lowest security level", "Cheapest security option"],
+                    answer: 1
+                },
+                {
+                    q: "What is polymorphic malware?",
+                    options: ["Multiple viruses together", "Malware that changes its code to evade detection", "Shape-shifting robot", "Network protocol"],
+                    answer: 1
+                },
+                {
+                    q: "What is DNS spoofing?",
+                    options: ["Creating fake websites", "Corrupting DNS data to redirect traffic", "Email phishing", "Password guessing"],
+                    answer: 1
+                },
+                {
+                    q: "What is a rootkit?",
+                    options: ["Root vegetable", "Malware providing privileged access while hiding presence", "Admin tool", "Plant disease"],
+                    answer: 1
+                },
+                {
+                    q: "What is the purpose of security orchestration?",
+                    options: ["Music security", "Automating security processes and workflows", "Orchestra protection", "Sound encryption"],
+                    answer: 1
+                },
+                {
+                    q: "What is threat intelligence?",
+                    options: ["IQ test for hackers", "Information about threats to inform security decisions", "AI security", "Network monitoring"],
+                    answer: 1
+                }
+            ]
+        };
+
+        let currentDifficulty = '';
+        let currentQuestions = [];
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let selectedAnswer = null;
+
+        function shuffleArray(array) {
+            const newArray = [...array];
+            for (let i = newArray.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+            }
+            return newArray;
+        }
+function startQuiz(difficulty) {
+    currentDifficulty = difficulty;
+    let shuffled = shuffleArray(questions[difficulty]);
+    if (difficulty === 'easy') {
+        currentQuestions = shuffled.slice(0, 10);
+    } else {
+        currentQuestions = shuffled;
+    }
+            currentQuestionIndex = 0;
+            score = 0;
+            selectedAnswer = null;
+
+            document.getElementById('difficultySelector').classList.add('hidden');
+            document.getElementById('quizCard').classList.add('active');
+
+            const badge = document.getElementById('difficultyBadge');
+            badge.textContent = difficulty.charAt(0).toUpperCase() + difficulty.slice(1);
+            badge.className = 'difficulty-badge ' + difficulty;
+
+            displayQuestion();
+        }
+
+        function displayQuestion() {
+            const question = currentQuestions[currentQuestionIndex];
+            document.getElementById('questionNumber').textContent = `Question ${currentQuestionIndex + 1}`;
+            document.getElementById('questionCount').textContent = `${currentQuestionIndex + 1}/${currentQuestions.length}`;
+            document.getElementById('question').textContent = question.q;
+
+            const optionsContainer = document.getElementById('options');
+            optionsContainer.innerHTML = '';
+
+            // Shuffle options and track correct answer
+            const shuffledOptions = question.options.map((option, index) => ({
+                text: option,
+                isCorrect: index === question.answer
+            }));
+            
+            // Shuffle the options array
+            for (let i = shuffledOptions.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffledOptions[i], shuffledOptions[j]] = [shuffledOptions[j], shuffledOptions[i]];
+            }
+
+            // Find new correct answer index after shuffle
+            const newCorrectIndex = shuffledOptions.findIndex(opt => opt.isCorrect);
+
+            // Display shuffled options
+            shuffledOptions.forEach((option, index) => {
+                const optionDiv = document.createElement('div');
+                optionDiv.className = 'option';
+                optionDiv.textContent = option.text;
+                optionDiv.onclick = () => selectAnswer(index, newCorrectIndex);
+                optionsContainer.appendChild(optionDiv);
+            });
+
+            selectedAnswer = null;
+
+            const progress = ((currentQuestionIndex) / currentQuestions.length) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+        }
+
+        function selectAnswer(index, correctIndex) {
+            if (selectedAnswer !== null) return;
+
+            selectedAnswer = index;
+            const options = document.querySelectorAll('.option');
+
+            options.forEach(opt => opt.classList.add('disabled'));
+
+            options[index].classList.add('selected');
+
+            setTimeout(() => {
+                if (index === correctIndex) {
+                    options[index].classList.add('correct');
+                    score++;
+                } else {
+                    options[index].classList.add('wrong');
+                    options[correctIndex].classList.add('correct');
+                }
+
+                // Auto advance to next question after 1.5 seconds
+                setTimeout(() => {
+                    nextQuestion();
+                }, 1500);
+            }, 300);
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+
+            if (currentQuestionIndex < currentQuestions.length) {
+                displayQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            document.getElementById('quizCard').classList.remove('active');
+            document.getElementById('resultCard').classList.add('active');
+
+            const totalQuestions = currentQuestions.length;
+            const incorrect = totalQuestions - score;
+            const percentage = Math.round((score / totalQuestions) * 100);
+
+            document.getElementById('scorePercentage').textContent = percentage + '%';
+            document.getElementById('correctCount').textContent = score;
+            document.getElementById('incorrectCount').textContent = incorrect;
+            document.getElementById('totalCount').textContent = totalQuestions;
+
+            let message = '';
+            if (percentage >= 90) {
+                message = '🏆 Outstanding! You\'re a cybersecurity expert!';
+            } else if (percentage >= 75) {
+                message = '🎖️ Excellent! Strong security knowledge!';
+            } else if (percentage >= 60) {
+                message = '👍 Good job! Keep learning!';
+            } else if (percentage >= 40) {
+                message = '📚 Fair attempt. Study more on security basics.';
+            } else {
+                message = '💪 Keep practicing! Cybersecurity needs dedication.';
+            }
+
+            document.getElementById('performanceMessage').textContent = message;
+        }
+
+        function restartQuiz() {
+            document.getElementById('resultCard').classList.remove('active');
+            document.getElementById('difficultySelector').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
